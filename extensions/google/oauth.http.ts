@@ -14,7 +14,7 @@ export async function fetchWithTimeout(
   init: RequestInit,
   timeoutMs = DEFAULT_FETCH_TIMEOUT_MS,
 ): Promise<Response> {
-  const guardedOptions = { url, init, timeoutMs };
+  const guardedOptions = { url, init, timeoutMs, signal: init.signal ?? undefined };
   const { response, release } = await fetchWithSsrFGuard(
     shouldUseEnvHttpProxyForUrl(url)
       ? withTrustedEnvProxyGuardedFetchMode(guardedOptions)
